@@ -1,21 +1,23 @@
 {
   "files": {
-    "main.css": "/rental-of-campers-test-task/static/css/main.7acaea2f.css",
-    "main.js": "/rental-of-campers-test-task/static/js/main.2a953cb4.js",
-    "static/js/673.d00597c4.chunk.js": "/rental-of-campers-test-task/static/js/673.d00597c4.chunk.js",
+    "main.css": "/rental-of-campers-test-task/static/css/main.eff69f91.css",
+    "main.js": "/rental-of-campers-test-task/static/js/main.596a48a9.js",
+    "static/js/390.af87c08e.chunk.js": "/rental-of-campers-test-task/static/js/390.af87c08e.chunk.js",
     "static/js/680.9facd5e6.chunk.js": "/rental-of-campers-test-task/static/js/680.9facd5e6.chunk.js",
     "static/js/270.61adb179.chunk.js": "/rental-of-campers-test-task/static/js/270.61adb179.chunk.js",
     "static/js/413.ce413aae.chunk.js": "/rental-of-campers-test-task/static/js/413.ce413aae.chunk.js",
+    "static/js/989.c54e60b6.chunk.js": "/rental-of-campers-test-task/static/js/989.c54e60b6.chunk.js",
     "index.html": "/rental-of-campers-test-task/index.html",
-    "main.7acaea2f.css.map": "/rental-of-campers-test-task/static/css/main.7acaea2f.css.map",
-    "main.2a953cb4.js.map": "/rental-of-campers-test-task/static/js/main.2a953cb4.js.map",
-    "673.d00597c4.chunk.js.map": "/rental-of-campers-test-task/static/js/673.d00597c4.chunk.js.map",
+    "main.eff69f91.css.map": "/rental-of-campers-test-task/static/css/main.eff69f91.css.map",
+    "main.596a48a9.js.map": "/rental-of-campers-test-task/static/js/main.596a48a9.js.map",
+    "390.af87c08e.chunk.js.map": "/rental-of-campers-test-task/static/js/390.af87c08e.chunk.js.map",
     "680.9facd5e6.chunk.js.map": "/rental-of-campers-test-task/static/js/680.9facd5e6.chunk.js.map",
     "270.61adb179.chunk.js.map": "/rental-of-campers-test-task/static/js/270.61adb179.chunk.js.map",
-    "413.ce413aae.chunk.js.map": "/rental-of-campers-test-task/static/js/413.ce413aae.chunk.js.map"
+    "413.ce413aae.chunk.js.map": "/rental-of-campers-test-task/static/js/413.ce413aae.chunk.js.map",
+    "989.c54e60b6.chunk.js.map": "/rental-of-campers-test-task/static/js/989.c54e60b6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.2a953cb4.js"
+    "static/css/main.eff69f91.css",
+    "static/js/main.596a48a9.js"
   ]
 }

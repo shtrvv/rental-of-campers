@@ -1,12 +1,26 @@
 import { Outlet } from 'react-router-dom';
-import { Header, Container, Navigation, List, Navlink } from './Layout.styled';
+import {
+  Header,
+  Container,
+  Navigation,
+  List,
+  Navlink,
+  NavlinkHome,
+  LabelBlock,
+} from './Layout.styled';
+import icons from '../../assets/icons.svg';
 
 const Layout = () => {
   return (
     <Container>
       <Header>
         <Navigation>
-          <Navlink to="/">Home</Navlink>
+          <LabelBlock>
+            <svg width="40" height="30">
+              <use href={icons + '#icon-alcove'}></use>
+            </svg>
+            <NavlinkHome to="/">Camper Rentals</NavlinkHome>
+          </LabelBlock>
           <List>
             <li>
               <Navlink to="/catalog">Catalog</Navlink>

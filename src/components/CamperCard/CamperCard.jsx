@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import icons from '../../assets/icons.svg';
 import {
   Card,
@@ -21,8 +22,20 @@ import {
   NameCapitalize,
   SvgDetail,
 } from './CamperCard.styled';
+import CamperModal from 'components/CamperModal/CamperModal';
 
 const CamperCard = ({ data }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(!isModalOpen);
+    document.body.style.overflow = 'hidden';
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(!isModalOpen);
+    document.body.style.overflow = 'auto';
+  };
+
   return (
     <Card>
       <Image src={data.gallery[0]} alt={data.name} />
@@ -95,8 +108,13 @@ const CamperCard = ({ data }) => {
             <span>{data.details.airConditioner && 'AC'}</span>
           </DetailsItem>
         </DetailsList>
-        <BtnInfo type="button">Show more</BtnInfo>
+        <BtnInfo type="button" onClick={handleOpenModal}>
+          Show more
+        </BtnInfo>
       </Info>
+      {isModalOpen ? (
+        <CamperModal handleCloseModal={handleCloseModal} data={data} />
+      ) : null}
     </Card>
   );
 };

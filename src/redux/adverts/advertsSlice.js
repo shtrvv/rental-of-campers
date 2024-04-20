@@ -3,6 +3,7 @@ import { getCampersThunk } from './advertsThunks';
 
 const initialState = {
   items: [],
+  customers: [],
   isLoading: false,
   error: null,
 };
@@ -26,6 +27,11 @@ const handleFulfilled = (state, { payload }) => {
 const advertsSlice = createSlice({
   name: 'adverts',
   initialState,
+  reducers: {
+    setCustomer: (state, { payload }) => {
+      state.customers.push(payload);
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getCampersThunk.pending, handlePending)
@@ -35,3 +41,4 @@ const advertsSlice = createSlice({
 });
 
 export const advertsReducer = advertsSlice.reducer;
+export const { setCustomer } = advertsSlice.actions;

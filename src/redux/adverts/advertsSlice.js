@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getCampersThunk } from './advertsThunks';
 
+const LS = JSON.parse(localStorage.getItem('persist:favorites')) || [];
+
 const initialState = {
   items: [],
-  customers: [],
   isLoading: false,
   error: null,
+  favorites: LS,
 };
 
 const handlePending = state => {
@@ -20,7 +22,7 @@ const handleRejected = (state, { payload }) => {
 
 const handleFulfilled = (state, { payload }) => {
   state.isLoading = false;
-  state.items = payload;
+  state.items = state.page >= 2 ? [state.items, ...payload] : [...payload];
   state.error = null;
 };
 
@@ -28,8 +30,11 @@ const advertsSlice = createSlice({
   name: 'adverts',
   initialState,
   reducers: {
-    setCustomer: (state, { payload }) => {
-      state.customers.push(payload);
+    setFavorites(state, { payload }) {
+      state.favorites.push(payload);
+    },
+    deleteFavorite(state, { payload }) {
+      state.favorites = state.favorites.filter(item => item._id !== payload);
     },
   },
   extraReducers: builder => {
@@ -41,4 +46,4 @@ const advertsSlice = createSlice({
 });
 
 export const advertsReducer = advertsSlice.reducer;
-export const { setCustomer } = advertsSlice.actions;
+export const { setFavorites, deleteFavorite } = advertsSlice.actions;

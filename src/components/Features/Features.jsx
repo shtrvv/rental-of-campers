@@ -105,6 +105,14 @@ const Features = ({ data }) => {
             <span>Freezer</span>
           </DetailsItem>
         )}
+        {data.details.TV !== 0 && (
+          <DetailsItem>
+            <SvgDetail width="20" height="20">
+              <use href={icons + '#icon-tv'}></use>
+            </SvgDetail>
+            <span>TV</span>
+          </DetailsItem>
+        )}
         {data.details.microwave !== 0 && (
           <DetailsItem>
             <SvgDetail width="20" height="20">

@@ -6,7 +6,6 @@ export const Card = styled.li`
   border-radius: 20px;
   display: flex;
   gap: 24px;
-  width: 888px;
 `;
 export const Image = styled.img`
   border-radius: 10px;
@@ -110,4 +109,7 @@ export const NameCapitalize = styled.span`
 export const SvgDetail = styled.svg`
   fill: transparent;
   stroke: var(--primary-dark);
+`;
+export const SvgHeartFill = styled.svg`
+  fill: var(--primary-red);
 `;

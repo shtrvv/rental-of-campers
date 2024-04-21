@@ -21,11 +21,18 @@ import {
   DetailsItem,
   NameCapitalize,
   SvgDetail,
+  SvgHeartFill,
 } from './CamperCard.styled';
 import CamperModal from 'components/CamperModal/CamperModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFavorites } from '../../redux/adverts/advertsSelectors';
+import { deleteFavorite, setFavorites } from '../../redux/adverts/advertsSlice';
 
 const CamperCard = ({ data }) => {
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const favorites = useSelector(selectFavorites);
+  const isFavorite = favorites.find(favorite => favorite._id === data._id);
 
   const handleOpenModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -34,6 +41,14 @@ const CamperCard = ({ data }) => {
   const handleCloseModal = () => {
     setIsModalOpen(!isModalOpen);
     document.body.style.overflow = 'auto';
+  };
+  const handleSetFavorite = () => {
+    dispatch(setFavorites(data));
+    localStorage.setItem('persist:favorites', JSON.stringify(favorites));
+  };
+  const handleDeleteFavorite = () => {
+    dispatch(deleteFavorite(data._id));
+    localStorage.setItem('persist:favorites', JSON.stringify(favorites));
   };
 
   return (
@@ -45,17 +60,26 @@ const CamperCard = ({ data }) => {
             <Data>{data.name}</Data>
             <PriceBlock>
               <Data>€{data.price},00</Data>
-              <BtnHeart type="button">
-                <SvgHeart width="24" height="24">
-                  <use href={icons + '#icon-heart'}></use>
-                </SvgHeart>
+              <BtnHeart
+                type="button"
+                onClick={isFavorite ? handleDeleteFavorite : handleSetFavorite}
+              >
+                {isFavorite ? (
+                  <SvgHeartFill width="24" height="24">
+                    <use href={icons + '#icon-heart-fill'}></use>
+                  </SvgHeartFill>
+                ) : (
+                  <SvgHeart width="24" height="24">
+                    <use href={icons + '#icon-heart-default'}></use>
+                  </SvgHeart>
+                )}
               </BtnHeart>
             </PriceBlock>
           </FirstInfo>
           <SecondInfo>
             <ReviewsBlock>
               <SvgStar width="16" height="16">
-                <use href={icons + '#icon-star'}></use>
+                <use href={icons + '#icon-star-fill'}></use>
               </SvgStar>
               <Rating>
                 {data.rating}({data.reviews.length} Reviews)

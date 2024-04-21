@@ -43,7 +43,7 @@ export const AdditionalInfo = styled.div`
   margin-top: 24px;
   overflow-y: scroll;
   max-height: 475px;
-  margin-right: -16px;
+  margin-right: -15px;
 
   &::-webkit-scrollbar {
     width: 8px;

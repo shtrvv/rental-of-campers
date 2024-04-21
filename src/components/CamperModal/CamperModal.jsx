@@ -62,7 +62,7 @@ const CamperModal = ({ handleCloseModal, data }) => {
           <SecondInfo>
             <ReviewsBlock>
               <SvgStar width="16" height="16">
-                <use href={icons + '#icon-star'}></use>
+                <use href={icons + '#icon-star-fill'}></use>
               </SvgStar>
               <Rating>
                 {data.rating}({data.reviews.length} Reviews)

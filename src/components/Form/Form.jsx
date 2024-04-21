@@ -1,7 +1,6 @@
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { setCustomer } from '../../redux/adverts/advertsSlice';
 import {
   Description,
   FormContainer,
@@ -15,7 +14,7 @@ import {
 } from './Form.styled';
 
 const Form = () => {
-  const dispatch = useDispatch();
+  const [formData, setFormData] = useState([]);
 
   const formik = useFormik({
     initialValues: {
@@ -35,9 +34,10 @@ const Form = () => {
       date: Yup.date().required('Date is required'),
       comment: Yup.string(),
     }),
-    onSubmit: async ({ name, email, date, comment }) => {
+    onSubmit: values => {
       if (formik.isValid) {
-        dispatch(setCustomer({ name, email, date, comment }));
+        setFormData(values);
+
         formik.resetForm();
         window.location.reload();
       } else {

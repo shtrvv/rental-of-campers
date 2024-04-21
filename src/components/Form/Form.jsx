@@ -37,7 +37,7 @@ const Form = () => {
     onSubmit: values => {
       if (formik.isValid) {
         setFormData(values);
-
+        console.log(formData);
         formik.resetForm();
         window.location.reload();
       } else {

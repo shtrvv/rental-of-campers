@@ -22,7 +22,7 @@ const handleRejected = (state, { payload }) => {
 
 const handleFulfilled = (state, { payload }) => {
   state.isLoading = false;
-  state.items = state.page >= 2 ? [state.items, ...payload] : [...payload];
+  state.items = [...state.items, ...payload];
   state.error = null;
 };
 

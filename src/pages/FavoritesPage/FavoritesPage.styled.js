@@ -11,3 +11,9 @@ export const Message = styled.p`
   color: var(--primary-red);
   margin: 0 auto;
 `;
+export const Section = styled.section`
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+`;

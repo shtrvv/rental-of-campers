@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { selectFavorites } from '../../redux/adverts/advertsSelectors';
 import CamperCard from 'components/CamperCard/CamperCard';
 import { List } from './FavoritesPage.styled';
-import { Section } from 'pages/CatalogPage/CatalogPage.styled';
+import { Section } from './FavoritesPage.styled';
 import { Message } from './FavoritesPage.styled';
 
 const FavoritePage = () => {

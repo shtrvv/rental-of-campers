@@ -1,10 +1,16 @@
 import CamperCard from 'components/CamperCard/CamperCard';
 import { List } from './CampersList.styled';
 import { BtnLoad, CampersBlock } from './CampersList.styled';
-import { getCampersThunk } from '../../redux/adverts/advertsThunks';
+import {
+  getAllCampersThunk,
+  getCampersThunk,
+} from '../../redux/adverts/advertsThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { selectCampers } from '../../redux/adverts/advertsSelectors';
+import {
+  selectCampers,
+  selectFiltered,
+} from '../../redux/adverts/advertsSelectors';
 
 const CampersList = () => {
   const dispatch = useDispatch();
@@ -13,14 +19,20 @@ const CampersList = () => {
   const max = 13;
 
   const campers = useSelector(selectCampers);
+  const filteredCampers = useSelector(selectFiltered);
+  // const showFiltered = dispatch(getAllCampersThunk());
 
   const handleLoadMore = () => {
     setPage(prev => prev + 1);
   };
 
   useEffect(() => {
-    dispatch(getCampersThunk(page));
-  }, [dispatch, page]);
+    if (filteredCampers.length > 0) {
+      dispatch(getAllCampersThunk());
+    } else {
+      dispatch(getCampersThunk(page));
+    }
+  }, [dispatch, page, filteredCampers]);
 
   useEffect(() => {
     if (campers.length >= max) {
@@ -33,12 +45,11 @@ const CampersList = () => {
   return (
     <CampersBlock>
       <List>
-        {campers &&
-          campers.map(data => {
-            return <CamperCard key={data._id} data={data} />;
-          })}
+        {(filteredCampers.length > 0 ? filteredCampers : campers).map(data => {
+          return <CamperCard key={data._id} data={data} />;
+        })}
       </List>
-      {!isLastPage && (
+      {!isLastPage && filteredCampers.length === 0 && (
         <BtnLoad type="button" onClick={handleLoadMore}>
           Load more
         </BtnLoad>

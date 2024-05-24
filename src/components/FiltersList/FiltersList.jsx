@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from 'react-redux';
 import icons from '../../assets/icons.svg';
 import {
   Label,
@@ -17,15 +18,49 @@ import {
   VehicleBlock,
 } from './FiltersList.styled';
 import { SvgDetail } from 'components/CamperCard/CamperCard.styled';
+import { selectCampers } from '../../redux/adverts/advertsSelectors';
+import { useState } from 'react';
+import { setFilteredCampers } from '../../redux/adverts/advertsSlice';
 
 const FiltersList = () => {
+  const campers = useSelector(selectCampers);
+  const dispatch = useDispatch();
+
+  const [filters, setFilters] = useState({
+    location: '',
+  });
+
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setFilters({ ...filters, [name]: value });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const filtered = campers.filter(camper => {
+      const matchesLocation = camper.location
+        .toLowerCase()
+        .includes(filters.location.toLowerCase());
+      return matchesLocation;
+    });
+    dispatch(setFilteredCampers(filtered));
+    console.log(filtered);
+  };
+
   return (
     <FilterBlock>
-      <form>
+      <form onSubmit={handleSubmit}>
         <InputBlock>
           <Label htmlFor="map">Location</Label>
           <InputContainer>
-            <Input type="text" id="map" name="map" placeholder="City" />
+            <Input
+              type="text"
+              id="map"
+              name="location"
+              placeholder="City"
+              value={filters.location}
+              onChange={handleInputChange}
+            />
             <SvgMap width="18" height="20">
               <use href={icons + '#icon-map-pin'}></use>
             </SvgMap>

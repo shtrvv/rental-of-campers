@@ -2,8 +2,8 @@ import CamperCard from 'components/CamperCard/CamperCard';
 import { List } from './CampersList.styled';
 import { BtnLoad, CampersBlock } from './CampersList.styled';
 import {
-  getAllCampersThunk,
   getCampersThunk,
+  loadMoreThunk,
 } from '../../redux/adverts/advertsThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -20,19 +20,18 @@ const CampersList = () => {
 
   const campers = useSelector(selectCampers);
   const filteredCampers = useSelector(selectFiltered);
-  // const showFiltered = dispatch(getAllCampersThunk());
 
   const handleLoadMore = () => {
     setPage(prev => prev + 1);
   };
 
   useEffect(() => {
-    if (filteredCampers.length > 0) {
-      dispatch(getAllCampersThunk());
+    if (page === 1) {
+      dispatch(getCampersThunk());
     } else {
-      dispatch(getCampersThunk(page));
+      dispatch(loadMoreThunk(page));
     }
-  }, [dispatch, page, filteredCampers]);
+  }, [dispatch, page]);
 
   useEffect(() => {
     if (campers.length >= max) {

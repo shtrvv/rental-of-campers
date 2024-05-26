@@ -118,3 +118,23 @@ export const BtnSearch = styled.button`
 export const VehicleBlock = styled.div`
   margin-bottom: 64px;
 `;
+export const BtnDelete = styled.button`
+  border-radius: 200px;
+  border: 1px solid var(--primary-red);
+  padding: 16px 60px;
+  width: 173px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--primary-red);
+  background-color: transparent;
+
+  &:is(:hover),
+  &:is(:focus) {
+    background-color: var(--secondary-light);
+  }
+`;
+export const BtnBlock = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;

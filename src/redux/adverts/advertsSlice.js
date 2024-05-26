@@ -1,11 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getCampersThunk, getAllCampersThunk } from './advertsThunks';
+import {
+  getCampersThunk,
+  getAllCampersThunk,
+  loadMoreThunk,
+} from './advertsThunks';
 
 const LS = JSON.parse(localStorage.getItem('persist:favorites')) || [];
 
 const initialState = {
   items: [],
-  filteredItems: [],
+  filter: {
+    items: [],
+    filtered: [],
+  },
   isLoading: false,
   error: null,
   favorites: LS,
@@ -21,15 +28,21 @@ const handleRejected = (state, { payload }) => {
   state.error = payload;
 };
 
-const handleFulfilled = (state, { payload }) => {
+const handleFulfilledGet = (state, { payload }) => {
+  state.isLoading = false;
+  state.items = payload;
+  state.error = null;
+};
+
+const handleFulfilledMore = (state, { payload }) => {
   state.isLoading = false;
   state.items = [...state.items, ...payload];
   state.error = null;
 };
 
-const handleAllFulfilled = (state, { payload }) => {
+const handleFulfilledAll = (state, { payload }) => {
   state.isLoading = false;
-  state.items = [...state.items, ...payload];
+  state.filter.items = payload;
   state.error = null;
 };
 
@@ -44,20 +57,26 @@ const advertsSlice = createSlice({
       state.favorites = state.favorites.filter(item => item._id !== payload);
     },
     setFilteredCampers(state, { payload }) {
-      state.filteredItems = [...payload];
+      state.filter.filtered = payload;
+    },
+    resetFilteredCampers(state) {
+      state.filter.filtered = [];
     },
   },
   extraReducers: builder => {
     builder
-      .addCase(getCampersThunk.pending, handlePending)
-      .addCase(getCampersThunk.fulfilled, handleFulfilled)
-      .addCase(getCampersThunk.rejected, handleRejected)
-      .addCase(getAllCampersThunk.pending, handlePending)
-      .addCase(getAllCampersThunk.fulfilled, handleAllFulfilled)
-      .addCase(getAllCampersThunk.rejected, handleRejected);
+      .addCase(getCampersThunk.fulfilled, handleFulfilledGet)
+      .addCase(getAllCampersThunk.fulfilled, handleFulfilledAll)
+      .addCase(loadMoreThunk.fulfilled, handleFulfilledMore)
+      .addMatcher(action => action.type.endsWith('/pending'), handlePending)
+      .addMatcher(action => action.type.endsWith('/rejected'), handleRejected);
   },
 });
 
 export const advertsReducer = advertsSlice.reducer;
-export const { setFavorites, deleteFavorite, setFilteredCampers } =
-  advertsSlice.actions;
+export const {
+  setFavorites,
+  deleteFavorite,
+  setFilteredCampers,
+  resetFilteredCampers,
+} = advertsSlice.actions;

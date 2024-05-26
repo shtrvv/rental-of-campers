@@ -16,19 +16,29 @@ import {
   StyledSpan,
   BtnSearch,
   VehicleBlock,
+  BtnDelete,
+  BtnBlock,
 } from './FiltersList.styled';
 import { SvgDetail } from 'components/CamperCard/CamperCard.styled';
-import { selectCampers } from '../../redux/adverts/advertsSelectors';
-import { useState } from 'react';
-import { setFilteredCampers } from '../../redux/adverts/advertsSlice';
+import { selectItemsForFilter } from '../../redux/adverts/advertsSelectors';
+import { useEffect, useState } from 'react';
+import {
+  resetFilteredCampers,
+  setFilteredCampers,
+} from '../../redux/adverts/advertsSlice';
+import { getAllCampersThunk } from '../../redux/adverts/advertsThunks';
 
 const FiltersList = () => {
-  const campers = useSelector(selectCampers);
+  const campers = useSelector(selectItemsForFilter);
   const dispatch = useDispatch();
 
   const [filters, setFilters] = useState({
     location: '',
   });
+
+  useEffect(() => {
+    dispatch(getAllCampersThunk());
+  }, [dispatch]);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -44,7 +54,11 @@ const FiltersList = () => {
       return matchesLocation;
     });
     dispatch(setFilteredCampers(filtered));
-    console.log(filtered);
+  };
+
+  const handleReset = () => {
+    setFilters({ location: '' });
+    dispatch(resetFilteredCampers());
   };
 
   return (
@@ -133,7 +147,12 @@ const FiltersList = () => {
             </EquipmentItem>
           </EquipmentList>
         </VehicleBlock>
-        <BtnSearch type="submit">Search</BtnSearch>
+        <BtnBlock>
+          <BtnSearch type="submit">Search</BtnSearch>
+          <BtnDelete type="button" onClick={handleReset}>
+            Reset
+          </BtnDelete>
+        </BtnBlock>
       </form>
     </FilterBlock>
   );

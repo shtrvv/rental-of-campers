@@ -1,10 +1,7 @@
 import CamperCard from 'components/CamperCard/CamperCard';
 import { List } from './CampersList.styled';
 import { BtnLoad, CampersBlock } from './CampersList.styled';
-import {
-  getCampersThunk,
-  loadMoreThunk,
-} from '../../redux/adverts/advertsThunks';
+import { getCampersThunk } from '../../redux/adverts/advertsThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import {
@@ -26,11 +23,7 @@ const CampersList = () => {
   };
 
   useEffect(() => {
-    if (page === 1) {
-      dispatch(getCampersThunk());
-    } else {
-      dispatch(loadMoreThunk(page));
-    }
+    dispatch(getCampersThunk(page));
   }, [dispatch, page]);
 
   useEffect(() => {

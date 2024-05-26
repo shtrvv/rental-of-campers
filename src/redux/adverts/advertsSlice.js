@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   getCampersThunk,
   getAllCampersThunk,
-  loadMoreThunk,
 } from './advertsThunks';
 
 const LS = JSON.parse(localStorage.getItem('persist:favorites')) || [];
@@ -29,12 +28,6 @@ const handleRejected = (state, { payload }) => {
 };
 
 const handleFulfilledGet = (state, { payload }) => {
-  state.isLoading = false;
-  state.items = payload;
-  state.error = null;
-};
-
-const handleFulfilledMore = (state, { payload }) => {
   state.isLoading = false;
   state.items = [...state.items, ...payload];
   state.error = null;
@@ -67,7 +60,6 @@ const advertsSlice = createSlice({
     builder
       .addCase(getCampersThunk.fulfilled, handleFulfilledGet)
       .addCase(getAllCampersThunk.fulfilled, handleFulfilledAll)
-      .addCase(loadMoreThunk.fulfilled, handleFulfilledMore)
       .addMatcher(action => action.type.endsWith('/pending'), handlePending)
       .addMatcher(action => action.type.endsWith('/rejected'), handleRejected);
   },

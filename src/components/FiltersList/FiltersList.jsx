@@ -18,6 +18,7 @@ import {
   VehicleBlock,
   BtnDelete,
   BtnBlock,
+  EquipLabel,
 } from './FiltersList.styled';
 import { SvgDetail } from 'components/CamperCard/CamperCard.styled';
 import { selectItemsForFilter } from '../../redux/adverts/advertsSelectors';
@@ -34,6 +35,14 @@ const FiltersList = () => {
 
   const [filters, setFilters] = useState({
     location: '',
+    equipment: {
+      airConditioner: false,
+      kitchen: false,
+      TV: false,
+      shower: false,
+    },
+    transmission: false,
+    vehicleType: '',
   });
 
   useEffect(() => {
@@ -41,8 +50,25 @@ const FiltersList = () => {
   }, [dispatch]);
 
   const handleInputChange = e => {
-    const { name, value } = e.target;
-    setFilters({ ...filters, [name]: value });
+    const { name, value, type, checked } = e.target;
+    if (type === 'checkbox') {
+      setFilters({
+        ...filters,
+        equipment: {
+          ...filters.equipment,
+          [name]: checked,
+        },
+      });
+    } else if (type === 'radio') {
+      setFilters({ ...filters, vehicleType: value });
+    } else {
+      setFilters({ ...filters, [name]: value });
+    }
+  };
+
+  const handleTransmission = e => {
+    const { checked } = e.target;
+    setFilters({ ...filters, transmission: checked });
   };
 
   const handleSubmit = e => {
@@ -51,13 +77,35 @@ const FiltersList = () => {
       const matchesLocation = camper.location
         .toLowerCase()
         .includes(filters.location.toLowerCase());
-      return matchesLocation;
+      const matchesEquipment = Object.keys(filters.equipment).every(
+        key => !filters.equipment[key] || camper.details[key] >= 1
+      );
+      const matchesTransmission =
+        !filters.transmission || camper.transmission === 'automatic';
+      const matchesType =
+        !filters.vehicleType || camper.form === filters.vehicleType;
+      return (
+        matchesLocation &&
+        matchesEquipment &&
+        matchesTransmission &&
+        matchesType
+      );
     });
     dispatch(setFilteredCampers(filtered));
   };
 
   const handleReset = () => {
-    setFilters({ location: '' });
+    setFilters({
+      location: '',
+      equipment: {
+        airConditioner: false,
+        automatic: false,
+        kitchen: false,
+        TV: false,
+        shower: false,
+      },
+      vehicleType: '',
+    });
     dispatch(resetFilteredCampers());
   };
 
@@ -84,66 +132,125 @@ const FiltersList = () => {
         <EquipBlock>
           <Header>Vehicle equipment</Header>
           <EquipmentList>
-            <EquipmentItem>
-              <EquipInput type="checkbox" />
-              <svg width="32" height="32">
-                <use href={icons + '#icon-ac'}></use>
-              </svg>
-              <StyledSpan>AC</StyledSpan>
+            <EquipmentItem checked={filters.equipment.airConditioner}>
+              <EquipLabel>
+                <EquipInput
+                  type="checkbox"
+                  name="airConditioner"
+                  checked={filters.equipment.airConditioner}
+                  onChange={handleInputChange}
+                />
+                <svg width="32" height="32">
+                  <use href={icons + '#icon-ac'}></use>
+                </svg>
+                <StyledSpan>AC</StyledSpan>
+              </EquipLabel>
             </EquipmentItem>
-            <EquipmentItem>
-              <EquipInput type="checkbox" />
-              <SvgDetail width="32" height="32">
-                <use href={icons + '#icon-automatic'}></use>
-              </SvgDetail>
-              <StyledSpan>Automatic</StyledSpan>
+            <EquipmentItem checked={filters.transmission}>
+              <EquipLabel>
+                <EquipInput
+                  type="checkbox"
+                  name="transmission"
+                  checked={filters.transmission}
+                  onChange={handleTransmission}
+                />
+                <SvgDetail width="32" height="32">
+                  <use href={icons + '#icon-automatic'}></use>
+                </SvgDetail>
+                <StyledSpan>Automatic</StyledSpan>
+              </EquipLabel>
             </EquipmentItem>
-            <EquipmentItem>
-              <EquipInput type="checkbox" />
-              <SvgDetail width="32" height="32">
-                <use href={icons + '#icon-kitchen'}></use>
-              </SvgDetail>
-              <StyledSpan>Kitchen</StyledSpan>
+            <EquipmentItem checked={filters.equipment.kitchen}>
+              <EquipLabel>
+                <EquipInput
+                  type="checkbox"
+                  name="kitchen"
+                  checked={filters.equipment.kitchen}
+                  onChange={handleInputChange}
+                />
+                <SvgDetail width="32" height="32">
+                  <use href={icons + '#icon-kitchen'}></use>
+                </SvgDetail>
+                <StyledSpan>Kitchen</StyledSpan>
+              </EquipLabel>
             </EquipmentItem>
-            <EquipmentItem>
-              <EquipInput type="checkbox" />
-              <SvgDetail width="32" height="32">
-                <use href={icons + '#icon-tv'}></use>
-              </SvgDetail>
-              <StyledSpan>TV</StyledSpan>
+            <EquipmentItem checked={filters.equipment.TV}>
+              <EquipLabel>
+                <EquipInput
+                  type="checkbox"
+                  name="TV"
+                  checked={filters.equipment.TV}
+                  onChange={handleInputChange}
+                />
+                <SvgDetail width="32" height="32">
+                  <use href={icons + '#icon-tv'}></use>
+                </SvgDetail>
+                <StyledSpan>TV</StyledSpan>
+              </EquipLabel>
             </EquipmentItem>
-            <EquipmentItem>
-              <EquipInput type="checkbox" />
-              <SvgDetail width="32" height="32">
-                <use href={icons + '#icon-shower'}></use>
-              </SvgDetail>
-              <StyledSpan>Shower/WC</StyledSpan>
+            <EquipmentItem checked={filters.equipment.shower}>
+              <EquipLabel>
+                <EquipInput
+                  type="checkbox"
+                  name="shower"
+                  checked={filters.equipment.shower}
+                  onChange={handleInputChange}
+                />
+                <SvgDetail width="32" height="32">
+                  <use href={icons + '#icon-shower'}></use>
+                </SvgDetail>
+                <StyledSpan>Shower/WC</StyledSpan>
+              </EquipLabel>
             </EquipmentItem>
           </EquipmentList>
         </EquipBlock>
         <VehicleBlock>
           <Header>Vehicle type</Header>
           <EquipmentList>
-            <EquipmentItem>
-              <EquipInput type="radio" />
-              <svg width="40" height="28">
-                <use href={icons + '#icon-van'}></use>
-              </svg>
-              <StyledSpan>Van</StyledSpan>
+            <EquipmentItem checked={filters.vehicleType === 'panelTruck'}>
+              <EquipLabel>
+                <EquipInput
+                  type="radio"
+                  name="vehicleType"
+                  value="panelTruck"
+                  checked={filters.vehicleType === 'panelTruck'}
+                  onChange={handleInputChange}
+                />
+                <svg width="40" height="28">
+                  <use href={icons + '#icon-van'}></use>
+                </svg>
+                <StyledSpan>Van</StyledSpan>
+              </EquipLabel>
             </EquipmentItem>
-            <EquipmentItem>
-              <EquipInput type="radio" />
-              <svg width="40" height="28">
-                <use href={icons + '#icon-fully-integrated'}></use>
-              </svg>
-              <StyledSpan>Fully Integrated</StyledSpan>
+            <EquipmentItem checked={filters.vehicleType === 'fullyIntegrated'}>
+              <EquipLabel>
+                <EquipInput
+                  type="radio"
+                  name="vehicleType"
+                  value="fullyIntegrated"
+                  checked={filters.vehicleType === 'fullyIntegrated'}
+                  onChange={handleInputChange}
+                />
+                <svg width="40" height="28">
+                  <use href={icons + '#icon-fully-integrated'}></use>
+                </svg>
+                <StyledSpan>Fully Integrated</StyledSpan>
+              </EquipLabel>
             </EquipmentItem>
-            <EquipmentItem>
-              <EquipInput type="radio" />
-              <svg width="40" height="28">
-                <use href={icons + '#icon-alcove'}></use>
-              </svg>
-              <StyledSpan>Alcove</StyledSpan>
+            <EquipmentItem checked={filters.vehicleType === 'alcove'}>
+              <EquipLabel>
+                <EquipInput
+                  type="radio"
+                  name="vehicleType"
+                  value="alcove"
+                  checked={filters.vehicleType === 'alcove'}
+                  onChange={handleInputChange}
+                />
+                <svg width="40" height="28">
+                  <use href={icons + '#icon-alcove'}></use>
+                </svg>
+                <StyledSpan>Alcove</StyledSpan>
+              </EquipLabel>
             </EquipmentItem>
           </EquipmentList>
         </VehicleBlock>

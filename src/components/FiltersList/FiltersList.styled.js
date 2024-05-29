@@ -72,15 +72,10 @@ export const EquipmentList = styled.ul`
   gap: 5px;
 `;
 export const EquipmentItem = styled.li`
-  border: 1px solid rgba(16, 24, 40, 0.2);
+  border: 1px solid ${({ checked }) => (checked ? '#E44848' : '#cfd1d4')};
   border-radius: 10px;
   width: 115px;
   height: 95px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   cursor: pointer;
 
   &:hover,
@@ -88,16 +83,21 @@ export const EquipmentItem = styled.li`
     border-color: var(--primary-red);
   }
 `;
+export const EquipLabel = styled.label`
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+`;
 export const EquipInput = styled.input`
-  width: 0;
-  height: 0;
   opacity: 0;
 `;
 export const EquipBlock = styled.div`
   margin-bottom: 32px;
 `;
 export const StyledSpan = styled.span`
-  font-size: 17px;
   text-align: center;
 `;
 export const BtnSearch = styled.button`

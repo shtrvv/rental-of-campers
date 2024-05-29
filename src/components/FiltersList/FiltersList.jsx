@@ -28,6 +28,7 @@ import {
   setFilteredCampers,
 } from '../../redux/adverts/advertsSlice';
 import { getAllCampersThunk } from '../../redux/adverts/advertsThunks';
+import Notiflix from 'notiflix';
 
 const FiltersList = () => {
   const campers = useSelector(selectItemsForFilter);
@@ -44,6 +45,7 @@ const FiltersList = () => {
     transmission: false,
     vehicleType: '',
   });
+  const [hasResult, setHasResult] = useState(true);
 
   useEffect(() => {
     dispatch(getAllCampersThunk());
@@ -91,7 +93,13 @@ const FiltersList = () => {
         matchesType
       );
     });
-    dispatch(setFilteredCampers(filtered));
+
+    if (filtered.length === 0) {
+      setHasResult(false);
+      Notiflix.Notify.failure('No campers with these parameters were found');
+    } else {
+      dispatch(setFilteredCampers(filtered));
+    }
   };
 
   const handleReset = () => {
@@ -104,6 +112,7 @@ const FiltersList = () => {
         TV: false,
         shower: false,
       },
+      transmission: false,
       vehicleType: '',
     });
     dispatch(resetFilteredCampers());

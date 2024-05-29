@@ -97,6 +97,7 @@ const FiltersList = () => {
     if (filtered.length === 0) {
       setHasResult(false);
       Notiflix.Notify.failure('No campers with these parameters were found');
+      console.log(hasResult);
     } else {
       dispatch(setFilteredCampers(filtered));
     }

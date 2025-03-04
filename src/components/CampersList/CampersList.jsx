@@ -1,6 +1,5 @@
 import CamperCard from 'components/CamperCard/CamperCard';
-import { List } from './CampersList.styled';
-import { BtnLoad, CampersBlock } from './CampersList.styled';
+import { List, BtnLoad, CampersBlock, BtnWrap } from './CampersList.styled';
 import { getCampersThunk } from '../../redux/adverts/advertsThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -43,11 +42,13 @@ const CampersList = () => {
           return <CamperCard key={data._id} data={data} />
         }))}
       </List>
+      <BtnWrap>
       {!isLastPage && filteredCampers.length === 0 && (
         <BtnLoad type="button" aria-label='Load more' onClick={handleLoadMore}>
           Load more
         </BtnLoad>
       )}
+      </BtnWrap>
     </CampersBlock>
   );
 };

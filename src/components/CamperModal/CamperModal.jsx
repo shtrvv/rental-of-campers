@@ -11,6 +11,7 @@ import {
   Description,
   ListDetails,
   BtnDetail,
+  Container
 } from './CamperModal.styled';
 import {
   Data,
@@ -26,7 +27,6 @@ import icons from '../../assets/icons.svg';
 import Features from 'components/Features/Features';
 import Reviews from 'components/Reviews/Reviews';
 import Form from 'components/Form/Form';
-import { Container } from './CamperModal.styled';
 
 const CamperModal = ({ handleCloseModal, data }) => {
   const [isFeaturesActive, setIsFeaturesActive] = useState(true);

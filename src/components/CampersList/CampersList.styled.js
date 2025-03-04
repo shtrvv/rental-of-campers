@@ -12,6 +12,9 @@ export const List = styled.ul`
   flex-direction: column;
   gap: 32px;
 `;
+export const BtnWrap = styled.div`
+  min-height: 50px;
+`
 export const BtnLoad = styled.button`
   border: 1px solid rgba(71, 84, 103, 0.2);
   border-radius: 200px;

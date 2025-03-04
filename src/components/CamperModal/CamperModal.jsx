@@ -80,13 +80,13 @@ const CamperModal = ({ handleCloseModal, data }) => {
         <AdditionalInfo>
           <ImgBlock>
             <li>
-              <Image src={data.gallery[0]} alt="" />
+              <Image src={data.gallery[0]} alt="" loading='lazy' />
             </li>
             <li>
-              <Image src={data.gallery[1]} alt="" />
+              <Image src={data.gallery[1]} alt="" loading='lazy' />
             </li>
             <li>
-              <Image src={data.gallery[2]} alt="" />
+              <Image src={data.gallery[2]} alt="" loading='lazy' />
             </li>
           </ImgBlock>
           <Description>{data.description}</Description>

@@ -265,8 +265,8 @@ const FiltersList = () => {
           </EquipmentList>
         </VehicleBlock>
         <BtnBlock>
-          <BtnSearch type="submit">Search</BtnSearch>
-          <BtnDelete type="button" onClick={handleReset}>
+          <BtnSearch type="submit" aria-label='Search'>Search</BtnSearch>
+          <BtnDelete type="button" aria-label='Reset' onClick={handleReset}>
             Reset
           </BtnDelete>
         </BtnBlock>

@@ -62,6 +62,7 @@ const CamperCard = ({ data }) => {
               <Data>€{data.price},00</Data>
               <BtnHeart
                 type="button"
+                aria-label='Favorite'
                 onClick={isFavorite ? handleDeleteFavorite : handleSetFavorite}
               >
                 {isFavorite ? (
@@ -132,7 +133,7 @@ const CamperCard = ({ data }) => {
             <span>{data.details.airConditioner && 'AC'}</span>
           </DetailsItem>
         </DetailsList>
-        <BtnInfo type="button" onClick={handleOpenModal}>
+        <BtnInfo type="button" aria-label='Show more' onClick={handleOpenModal}>
           Show more
         </BtnInfo>
       </Info>

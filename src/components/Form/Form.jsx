@@ -99,7 +99,7 @@ const Form = () => {
             value={formik.values.comment}
           />
         </InputsWrap>
-        <BtnSubmit type="submit">Send</BtnSubmit>
+        <BtnSubmit type="submit" aria-label='Submit'>Send</BtnSubmit>
       </form>
     </FormContainer>
   );

@@ -53,7 +53,7 @@ const CamperModal = ({ handleCloseModal, data }) => {
         <MainInfo>
           <FirstInfo>
             <Data>{data.name}</Data>
-            <BtnClose onClick={handleCloseModal}>
+            <BtnClose aria-label='Close' onClick={handleCloseModal}>
               <SvgClose width="32" height="32">
                 <use href={icons + '#icon-close'}></use>
               </SvgClose>
@@ -94,6 +94,7 @@ const CamperModal = ({ handleCloseModal, data }) => {
             <li>
               <BtnDetail
                 type="button"
+                aria-label='Features'
                 onClick={() => setIsFeaturesActive(true)}
                 className={isFeaturesActive ? 'active' : ''}
               >
@@ -103,6 +104,7 @@ const CamperModal = ({ handleCloseModal, data }) => {
             <li>
               <BtnDetail
                 type="button"
+                aria-label='Reviews'
                 onClick={() => setIsFeaturesActive(false)}
                 className={!isFeaturesActive ? 'active' : ''}
               >

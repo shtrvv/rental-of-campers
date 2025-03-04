@@ -42,7 +42,7 @@ const CampersList = () => {
         })}
       </List>
       {!isLastPage && filteredCampers.length === 0 && (
-        <BtnLoad type="button" onClick={handleLoadMore}>
+        <BtnLoad type="button" aria-label='Load more' onClick={handleLoadMore}>
           Load more
         </BtnLoad>
       )}

@@ -37,9 +37,11 @@ const CampersList = () => {
   return (
     <CampersBlock>
       <List>
-        {(filteredCampers.length > 0 ? filteredCampers : campers).map(data => {
-          return <CamperCard key={data._id} data={data} />;
-        })}
+        {campers.length === 0 ? (
+            <p>Loading campers...</p>
+          ) : ((filteredCampers.length > 0 ? filteredCampers : campers).map(data => {
+          return <CamperCard key={data._id} data={data} />
+        }))}
       </List>
       {!isLastPage && filteredCampers.length === 0 && (
         <BtnLoad type="button" aria-label='Load more' onClick={handleLoadMore}>

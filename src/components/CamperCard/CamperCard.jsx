@@ -53,7 +53,7 @@ const CamperCard = ({ data }) => {
 
   return (
     <Card>
-      <Image src={data.gallery[0]} alt={data.name} width='290' height='310' loading='lazy' />
+      <Image src={data.gallery[0]} alt={data.name} width='290' height='310' />
       <Info>
         <MainInfo>
           <FirstInfo>

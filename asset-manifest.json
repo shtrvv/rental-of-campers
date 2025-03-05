@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/rental-of-campers/static/css/main.426a1052.css",
-    "main.js": "/rental-of-campers/static/js/main.e7e20b0d.js",
+    "main.js": "/rental-of-campers/static/js/main.bc56b844.js",
     "static/js/390.d4140bcf.chunk.js": "/rental-of-campers/static/js/390.d4140bcf.chunk.js",
     "static/js/156.4d611dca.chunk.js": "/rental-of-campers/static/js/156.4d611dca.chunk.js",
     "static/js/294.dba45062.chunk.js": "/rental-of-campers/static/js/294.dba45062.chunk.js",
@@ -14,7 +14,7 @@
     "static/media/icons.svg": "/rental-of-campers/static/media/icons.03e2c3fa0f7b66655d98eb7663924304.svg",
     "index.html": "/rental-of-campers/index.html",
     "main.426a1052.css.map": "/rental-of-campers/static/css/main.426a1052.css.map",
-    "main.e7e20b0d.js.map": "/rental-of-campers/static/js/main.e7e20b0d.js.map",
+    "main.bc56b844.js.map": "/rental-of-campers/static/js/main.bc56b844.js.map",
     "390.d4140bcf.chunk.js.map": "/rental-of-campers/static/js/390.d4140bcf.chunk.js.map",
     "156.4d611dca.chunk.js.map": "/rental-of-campers/static/js/156.4d611dca.chunk.js.map",
     "294.dba45062.chunk.js.map": "/rental-of-campers/static/js/294.dba45062.chunk.js.map",
@@ -27,6 +27,6 @@
   },
   "entrypoints": [
     "static/css/main.426a1052.css",
-    "static/js/main.e7e20b0d.js"
+    "static/js/main.bc56b844.js"
   ]
 }

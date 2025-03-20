@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /search/
+Disallow: /cart/
+
+Allow: /catalog/
+Allow: /favorites/
+
+Sitemap: https://shtrvv.github.io/rental-of-campers/sitemap.xml
